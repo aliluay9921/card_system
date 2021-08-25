@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\AuthController;
+use App\Http\Controllers\api\v1\QicardController;
 use App\Mail\resetPasswordMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api\v1',], function () {
         Route::get('/orders/{id}', 'OrderController@show');
 
         route::post('recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'rechargeBalance']);
+        route::post('addBills', [\App\Http\Controllers\api\v1\QicardController::class, 'addBill']);
     });
+    route::post('get_notification', [\App\Http\Controllers\api\v1\QicardController::class, 'getNotification']);
+
     Route::get('/cities', 'CityController@index');
     Route::get('/amounts', 'AmountController@index');
 });
