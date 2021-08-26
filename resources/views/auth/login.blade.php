@@ -27,9 +27,8 @@
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                           placeholder="اسم المسخدم او رقم الهاتف" type="text" name="email"
-                                           value="{{ old('email') }}"
-                                           required autofocus>
+                                        placeholder="اسم المسخدم او رقم الهاتف" type="text" name="email"
+                                        value="{{ old('email') }}" required autofocus>
                                 </div>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -43,7 +42,7 @@
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                           name="password" placeholder="كلمة السر" type="password" required>
+                                        name="password" placeholder="كلمة السر" type="password" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -52,8 +51,8 @@
                                 @endif
                             </div>
                             <div class="custom-control custom-control-alternative custom-checkbox">
-                                <input class="custom-control-input" name="remember" id="customCheckLogin"
-                                       type="checkbox" {{ old('remember') ? 'checked' : '' }}>
+                                <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox"
+                                    {{ old('remember') ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="customCheckLogin">
                                     <span class="text-muted">تذكرني</span>
                                 </label>
@@ -65,14 +64,8 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-light">
-                                <small>نسيت كلمه السر؟</small>
-                            </a>
-                        @endif
-                    </div>
-                    <div class="col-6 text-right">
+
+                    <div class="col-6 text-right ml-5">
                         <a href="{{ route('register') }}" class="text-light">
                             <small>تسجيل حساب جديد</small>
                         </a>
