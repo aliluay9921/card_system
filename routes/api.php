@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api\v1',], function () {
         route::post('addBills', [\App\Http\Controllers\api\v1\QicardController::class, 'addBill']);
     });
     route::post('get_notification', [\App\Http\Controllers\api\v1\QicardController::class, 'getNotification']);
+    route::get('get_recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'getrechargeBalance']);
 
     Route::get('/cities', 'CityController@index');
     Route::get('/amounts', 'AmountController@index');

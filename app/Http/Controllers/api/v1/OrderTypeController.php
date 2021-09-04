@@ -10,6 +10,6 @@ class OrderTypeController extends Controller
 {
     public function index()
     {
-        return response()->json(['types' => OrderType::where('active',1)->get()], 200);
+        return response()->json(['types' => OrderType::where('active', 1)->get()], 200);
     }
 }

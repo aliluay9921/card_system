@@ -1,6 +1,5 @@
 @extends('layouts.app')
-
-@section('amount')
+@section('company')
     text-primary
 @endsection
 @section('content')
@@ -16,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header align-items-center ">
-                        <a href="{{ route('amount.index') }}" class="btn btn-primary"> جدول القيم</a>
+                        <a href="{{ route('order.typeOrders') }}" class="btn btn-primary"> جدول انواع الحوالات</a>
                     </div>
 
                     <div class="card-body ">
@@ -28,48 +27,52 @@
                                 </button>
                             </div>
                         @endif
-                        <form action="{{ route('amount.store') }}" method="post" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('order_type_update') }}">
+                            @method('PUT')
                             @csrf
+                            <input type="hidden" name="id" value="{{ $order_type[0]->id }}">
                             <div class="form-group">
                                 <label for="name" class="w-100 text-right">الاسم </label>
-                                <input type="text" class="form-control" id="name" name="value">
-
-                                @error('value')
+                                <input type="text" class="form-control" name="name" value="{{ $order_type[0]->name }}">
+                                @error('name')
                                     <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="name" class="w-100 text-right">السعر </label>
-                                <input type="text" class="form-control" id="name" name="price">
-
-                                @error('price')
+                                <label for="name" class="w-100 text-right">الاسم عربي </label>
+                                <input type="text" class="form-control" name="name_ar"
+                                    value="{{ $order_type[0]->name_ar }}">
+                                @error('name_ar')
                                     <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <div class="form-group">
-                                <label for="active" class="w-100 text-right">الحالة</label>
-                                <select class="form-control" id="active" name="active">
-                                    <option value="1">فعال</option>
-                                    <option value="0">غير فعال</option>
-                                </select>
-                                @error('active')
-                                    <div class="error text-danger text-right">{{ $errors->first('active') }}</div>
+                                <label for="name" class="w-100 text-right">رقم الهاتف </label>
+                                <input type="text" class="form-control" name="phone_number"
+                                    value="{{ $order_type[0]->phone_number }}">
+                                @error('phone_number')
+                                    <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror
                             </div>
-
 
                             <span class="w-100  d-flex mt-4">
-                                <input type="submit" class="btn btn-success m-auto  w-25" value="اضافه">
+                                <input type="submit" class="btn btn-success m-auto  w-25" value="تعديل">
                             </span>
                         </form>
 
                     </div>
-
                 </div>
             </div>
         </div>
 
 
     </div>
+@endsection
+
+
+@section('js')
+    <script>
+
+
+    </script>
 @endsection

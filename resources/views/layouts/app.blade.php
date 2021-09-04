@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,36 +18,38 @@
     <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Amiri">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri">
     <style>
         body {
             font-family: 'Amiri', serif;
         }
+
     </style>
 
 </head>
+
 <body class="{{ $class ?? '' }}">
-@auth()
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-    @include('layouts.navbars.sidebar')
+    @auth()
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @include('layouts.navbars.sidebar')
 
-@endauth
+    @endauth
 
-<div class="main-content">
-    @include('layouts.navbars.navbar')
-    @yield('content')
-</div>
+    <div class="main-content">
+        @include('layouts.navbars.navbar')
+        @yield('content')
+    </div>
 
-<script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
-<script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-@stack('js')
+    @stack('js')
 
-<!-- Argon JS -->
-<script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
 
 </body>
+
 </html>

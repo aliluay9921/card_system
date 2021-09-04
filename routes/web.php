@@ -17,7 +17,6 @@ Route::post('register', 'Auth\RegisterController@create');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-
 });
 
 Route::middleware(['auth', 'ActiveUser'])->group(function () {
@@ -34,7 +33,9 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
     Route::post('card/disable', 'CardController@disable')->name('card.disable');
     Route::post('card/amount', 'CardController@amount')->name('card.amount');
     Route::get('order/datatable', 'OrderController@dataTable')->name('order.datatable');
-
+    Route::put('/order_type_active', [\App\Http\Controllers\OrderTypeController::class, 'activeOrderType'])->name('order_type_active');
+    Route::put('/order_type_edit', [\App\Http\Controllers\OrderTypeController::class, 'update'])->name('order_type_update');
+    Route::get('/charge_report', [\App\Http\Controllers\LogController::class, 'getChargeReport'])->name('charge_report');
 
     Route::put('profile', 'ProfileController@update')->name('profile.update');
     Route::put('order/approve/{order?}', 'OrderController@approve')->name('order.approve');
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
     Route::get('users/{user}/userRoles/{role}', 'UserController@userRoles')->name('user.userRoles');
 
     Route::get('log/datatable', 'LogController@dataTable')->name('log.datatable');
+    Route::get('datatable_cahrge_balance', 'LogController@dataTableChargeReport')->name('log.datatable_cahrge_balance');
 
     Route::resource('company', 'CompanyController');
     Route::resource('log', 'LogController');
@@ -55,15 +57,12 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
     Route::resource('amount', 'AmountController');
     Route::resource('users', 'UserController');
     Route::resource('ads', 'AdsController');
+    Route::resource('order_type', 'OrderTypeController');
     Route::resource('order', 'OrderController');
 
     Route::get('users/{user?}', 'UserController@show')->name('users.show');
     Route::put('users/change/password/{user}', 'UserController@changePassword')->name('users.change.password');
-
 });
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-

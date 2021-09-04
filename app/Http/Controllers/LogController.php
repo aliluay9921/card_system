@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CahrgeBalance;
 use App\Log;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -13,11 +14,28 @@ class LogController extends Controller
 
         return view('cards.log.index');
     }
+    public function getChargeReport()
+    {
+        return view('cards.log.chargeReport');
+    }
+    function dataTableChargeReport()
+    {
+        $charge_balance = CahrgeBalance::with('user', 'amount');
+        return Datatables::of($charge_balance)
+            ->editColumn('created_at', function ($data) {
+                return $data->created_at->toDateTimeString();
+            })
+            ->editColumn('amount_value', function ($data) {
+                return $data->amount->value;
+            })
+            ->editColumn('amount_price', function ($data) {
+                return $data->amount->price;
+            })->make(true);
+    }
 
     function dataTable()
     {
-//        type
-//transfer_to
+
 
         $cards = Log::with('user', 'transfer', 'card.amount');
 

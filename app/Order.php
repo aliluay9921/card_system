@@ -28,6 +28,5 @@ class Order extends Model
     {
         if ($this->admin_id && $this->approved_at) return 'مكتمل';
         return 'قيد الانتظار';
-
     }
 }

@@ -22,6 +22,7 @@ class OrderController extends Controller
         return view('cards.order.index');
     }
 
+
     public function dataTable()
     {
         $orders = Order::with('type', 'user');

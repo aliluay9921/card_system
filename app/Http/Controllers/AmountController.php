@@ -27,7 +27,6 @@ class AmountController extends Controller
     public function create()
     {
         return view('cards.amount.create');
-
     }
 
     /**
@@ -38,13 +37,17 @@ class AmountController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'value' => 'required',
-            'active' => 'required'
-        ],
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'value' => 'required',
+                'active' => 'required',
+                'price' => 'required'
+            ],
             [
                 'value.required' => 'يرجى ادخال قيمه البطاقه',
                 'active.required' => 'يرجى ادخال حاله البطاقه',
+                'price.required' => 'يرجى ادخال سعر البطاقه',
             ]
         );
 
@@ -56,6 +59,7 @@ class AmountController extends Controller
         Amount::create([
             'value' => $request->value,
             'active' => $request->active,
+            'price' => $request->price,
             'created_at' => now(),
         ]);
 
@@ -83,7 +87,6 @@ class AmountController extends Controller
     public function edit(Amount $amount)
     {
         return view('cards.amount.edit', compact('amount'));
-
     }
 
     /**
@@ -95,14 +98,19 @@ class AmountController extends Controller
      */
     public function update(Request $request, Amount $amount)
     {
-        $validator = Validator::make($request->all(), [
-            'value' => 'required',
-            'active' => 'required',
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'value' => 'required',
+                'active' => 'required',
+                'price' => 'required'
 
-        ],
+            ],
             [
                 'value.required' => 'يرجى ادخال قيمه البطاقه ',
                 'active.required' => 'يرجى ادخال حاله البطاقه',
+                'price.required' => 'يرجى ادخال سعر البطاقه',
+
 
             ]
         );
@@ -113,6 +121,7 @@ class AmountController extends Controller
 
         $amount->value = $request->value;
         $amount->active = $request->active;
+        $amount->price = $request->price;
         $amount->updated_at = now();
         $amount->save();
 

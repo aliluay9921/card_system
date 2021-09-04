@@ -2,23 +2,23 @@
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
             Cards
-            {{--            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">--}}
+            {{-- <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="..."> --}}
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                    aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
                             cards
-{{--                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">--}}
+                            {{-- <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg"> --}}
                         </span>
                     </div>
                 </a>
@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-6 collapse-close">
                         <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
-                                aria-label="Toggle sidenav">
+                            data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
+                            aria-label="Toggle sidenav">
                             <span></span>
                             <span></span>
                         </button>
@@ -78,6 +78,10 @@
                     <a class="nav-link my-1  @yield('report')" href="{{ route('log.index') }}">
                         <i class="ni ni-tv-2"></i>التقارير</a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link my-1  @yield('report')" href="{{ route('charge_report') }}">
+                        <i class="fas fa-balance-scale"></i>تقارير التعبئة</a>
+                </li>
 
                 <li class="nav-item ">
                     <a class="nav-link my-1  @yield('amount')" href="{{ route('amount.index') }}">
@@ -89,33 +93,39 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('card')" href="{{route('card.index')}}">
+                    <a class="nav-link my-1  @yield('card')" href="{{ route('card.index') }}">
                         <i class="ni ni-credit-card"></i>
                         البطاقات
                     </a>
 
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('virtualBalance')" href="{{route('virtualBalance.index')}}">
+                    <a class="nav-link my-1 @yield('virtualBalance')" href="{{ route('virtualBalance.index') }}">
                         <i class="fas fa-money-bill-wave"></i>
                         الرصيد الافتراضي </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('ads')" href="{{route('ads.index')}}">
+                    <a class="nav-link my-1 @yield('ads')" href="{{ route('ads.index') }}">
                         <i class="fas fa-tv"></i>
                         الاعلانات
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('order')" href="{{route('order.index')}}">
+                    <a class="nav-link my-1 @yield('order')" href="{{ route('order.index') }}">
                         <i class="ni ni-send"></i>
                         الحوالات
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('company')" href="{{route('company.index')}}">
+                    <a class="nav-link my-1 @yield('company')" href="{{ route('company.index') }}">
                         <i class="ni ni-building"></i>
                         الشركات
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link my-1 @yield('order')" href="{{ route('order_type.index') }}">
+                        <i class="fas fa-text-height"></i>
+                        نوع الحوالات
                     </a>
                 </li>
                 @endrole

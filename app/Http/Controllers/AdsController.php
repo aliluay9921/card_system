@@ -32,7 +32,6 @@ class AdsController extends Controller
     {
         $users = User::whereNotNull('activate_at')->get();
         return view('cards.ads.create', compact('users'));
-
     }
 
     /**
@@ -43,17 +42,19 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-//        return Ads::with('users')->get();
+        //        return Ads::with('users')->get();
 
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'image' => 'required |image',
-            'url' => 'required ',
-            'public' => 'required ',
-            'users' => Rule::requiredIf($request->public == 0),
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'title' => 'required',
+                'image' => 'required |image',
+                'url' => 'required ',
+                'public' => 'required ',
+                'users' => Rule::requiredIf($request->public == 0),
 
-        ],
+            ],
             [
                 'title.required' => 'يرجى ادخال عنوان الاعلان',
                 'image.required' => 'يرجى اختيار صوره الاعلان',
@@ -95,7 +96,6 @@ class AdsController extends Controller
         }
 
         return back();
-
     }
 
 
@@ -111,7 +111,6 @@ class AdsController extends Controller
         $ad_users = Ads_user::where('ads_id', $ad->id)->pluck('user_id')->toArray();
 
         return view('cards.ads.edit', compact('ad', 'users', 'ad_users'));
-
     }
 
 
@@ -119,12 +118,14 @@ class AdsController extends Controller
     {
 
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'url' => 'required ',
-            'public' => 'required ',
-            'users' => Rule::requiredIf($request->public == 0),
-        ],
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'title' => 'required',
+                'url' => 'required ',
+                'public' => 'required ',
+                'users' => Rule::requiredIf($request->public == 0),
+            ],
             [
                 'title.required' => 'يرجى ادخال عنوان الاعلان',
                 'image.required' => 'يرجى اختيار صوره الاعلان',
@@ -151,7 +152,7 @@ class AdsController extends Controller
         $ad->active = $request->active;
         $ad->url = $request->url;
         $ad->public = $request->public;
-//        $ads->image = $imageName;
+        //        $ads->image = $imageName;
         $ad->updated_at = now();
 
         $ad->save();

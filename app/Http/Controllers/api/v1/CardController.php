@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Amount;
+use App\CahrgeBalance;
 use App\Card;
 use App\Company;
 use App\Http\Controllers\Controller;
@@ -50,23 +51,20 @@ class CardController extends Controller
             [
                 'amount' => 'required|numeric |min:0',
                 'quantity' => 'required |numeric |min:0',
-                'company_id' => 'required |numeric |min:0 ',
+                'company_id' => 'required |numeric |min:0',
                 'lng' => 'required',
                 'lat' => 'required',
             ]
         );
-
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()]);
         }
         $amount = Amount::where('value', $request->amount)->pluck('id')->first();
-
         if (!$amount) {
             return response()->json([
                 'error' => "يرجى التحقق من قيمه الشراء",
             ], 404);
         }
-
         $user = User::find(Auth::id());
         $cards = Card::where('used', 0)
             ->where('disable', 0)
@@ -74,11 +72,9 @@ class CardController extends Controller
             ->where('amount_id', $amount)
             ->take($request->quantity)
             ->get();
-
         $sum = $cards->sum(function ($card) {
             return $card->sale_price;
         });
-
         if ($user->balance < $sum) {
             return response()->json([
                 'error' => "ليس لديك رصيد كافي لديك فقط $user->balance",
@@ -89,23 +85,18 @@ class CardController extends Controller
                 'error' => 'يتوفر ' . count($cards) . 'بطاقات فقط في الوفت الحالي',
             ], 404);
         }
-
         $keys = [];
         $company = Company::find($request->company_id);
-
         $payed = 0;
         $points = 0;
         foreach ($cards as $card) {
-
             $balance = $user->balance;
             $user->balance -= $card->sale_price;
             $user->save();
-
             $card->used = 1;
             $card->puy_at = now();
             $card->save();
             $keys[] = $card->key;
-
             $log = $company->transfer()->create([
                 'user_id' => Auth::id(),
                 'before' => $balance,
@@ -120,14 +111,24 @@ class CardController extends Controller
             $points += $log->points;
         }
         $user->points = $points;
-
-        return response()->json([
-            'message' => "$payed تم الشراء بقيمه ",
-            'user' => $user,
-            'cards' => $keys,
-        ], 200);
+        if ($request->has('receiver_number')) {
+            CahrgeBalance::create([
+                'amount_id' => $amount,
+                'user_id' => auth()->user()->id,
+                'phone_number' => $request->receiver_number
+            ]);
+            return response()->json([
+                'message' => "$payed تم الشراء بقيمه ",
+                'receiver_number' => $request->receiver_number,
+                'cards' => $keys,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => "$payed تم الشراء بقيمه ",
+                'cards' => $keys,
+            ], 200);
+        }
     }
-
 
     public function destroy(Card $card)
     {

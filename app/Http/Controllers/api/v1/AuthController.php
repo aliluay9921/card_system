@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\User;
+use App\CahrgeBalance;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\resetPasswordMail;
@@ -51,6 +52,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255', 'min:10', 'unique:users'],
             'user_name' => ['required', 'string', 'max:255', 'unique:users', 'min:6'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:8'],
             'lat' => ['required', 'string'],
             'lng' => ['required', 'string'],
@@ -94,7 +96,6 @@ class AuthController extends Controller
     // 
     public function resetPassword(Request $request)
     {
-
 
         $user = User::where('email', $request->email)->first();
         $user->update([
@@ -143,18 +144,33 @@ class AuthController extends Controller
     // 
     public function rechargeBalance(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'balance' => 'required|numeric',
-
         ]);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->messages()], 422);
         }
         $user = User::find(auth()->user()->id);
+        CahrgeBalance::create([
+            'amounts' => $request->balance,
+            'phone_number' => $user->phone
+        ]);
         return response()->json([
             'success' => [
                 'user_phone' => $user->phone,
                 'balance' => $request->balance
+            ],
+            'errors' => false
+        ]);
+    }
+    public function getrechargeBalance()
+    {
+        $get = CahrgeBalance::all();
+        return response()->json([
+            'success' => [
+                'data' => $get,
+                'status' => 200
             ],
             'errors' => false
         ]);
