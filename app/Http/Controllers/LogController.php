@@ -20,16 +20,10 @@ class LogController extends Controller
     }
     function dataTableChargeReport()
     {
-        $charge_balance = CahrgeBalance::with('user', 'amount');
+         $charge_balance = CahrgeBalance::with('user');
         return Datatables::of($charge_balance)
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->toDateTimeString();
-            })
-            ->editColumn('amount_value', function ($data) {
-                return $data->amount->value;
-            })
-            ->editColumn('amount_price', function ($data) {
-                return $data->amount->price;
             })->make(true);
     }
 

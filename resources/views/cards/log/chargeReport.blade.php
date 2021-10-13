@@ -134,14 +134,14 @@
                         searchable: true
                     },
                     {
-                        "data": "amount.value",
-                        "name": "amount.value",
+                        "data": "amounts",
+                        "name": "amounts",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        "data": "amount.price",
-                        "name": "amount.price",
+                        "data": "sale_price",
+                        "name": "sale_price",
                         orderable: true,
                         searchable: true
                     },

@@ -32,7 +32,7 @@ class QicardController extends Controller
             'content-type' => 'application/json',
         ], 'json' => [
             "username" => "Alnasrey91@tasdid.net",
-            "password" => "&551(fWgA"
+            "password" => "HAMZA550183a"
         ]]);
         $token =   json_decode((string) $login->getBody())->token;
         $request_guzzele = $client->request('PUT', 'https://api.tasdid.net/v1/api/Provider/AddBill', ["headers" => [

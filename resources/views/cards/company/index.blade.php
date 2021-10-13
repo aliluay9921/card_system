@@ -48,6 +48,10 @@
                                                     class="btn btn-info">
                                                     تعديل
                                                 </a>
+  <a href="{{ route('company.delete', [$company->id]) }}" type="button"
+                                                    class="btn btn-danger">
+                                                    حذف
+                                                </a>
                                             </div>
                                         </th>
                                         <th>{{ $company->created_at }}</th>

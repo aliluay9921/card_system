@@ -80,6 +80,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'lat' => $request->lat,
+            'email' => $request->email,
+
             'lng' => $request->lng,
             'image' => $profileName,
             'city_id' => $request->city_id,
@@ -96,8 +98,17 @@ class AuthController extends Controller
     // 
     public function resetPassword(Request $request)
     {
+ $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', 'exists:users,email'],
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->messages()], 422);
+        }
 
         $user = User::where('email', $request->email)->first();
+
         $user->update([
             'code' => random_int(100000, 999999)
         ]);

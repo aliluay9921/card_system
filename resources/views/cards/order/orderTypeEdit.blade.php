@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header align-items-center ">
-                        <a href="{{ route('order.typeOrders') }}" class="btn btn-primary"> جدول انواع الحوالات</a>
+                        <a href="{{ route('order_type.index') }}" class="btn btn-primary"> جدول انواع الحوالات</a>
                     </div>
 
                     <div class="card-body ">
@@ -30,10 +30,10 @@
                         <form method="post" action="{{ route('order_type_update') }}">
                             @method('PUT')
                             @csrf
-                            <input type="hidden" name="id" value="{{ $order_type[0]->id }}">
+                            <input type="hidden" name="id" value="{{ $orderType->id }}">
                             <div class="form-group">
                                 <label for="name" class="w-100 text-right">الاسم </label>
-                                <input type="text" class="form-control" name="name" value="{{ $order_type[0]->name }}">
+                                <input type="text" class="form-control" name="name" value="{{ $orderType->name }}">
                                 @error('name')
                                     <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="name" class="w-100 text-right">الاسم عربي </label>
                                 <input type="text" class="form-control" name="name_ar"
-                                    value="{{ $order_type[0]->name_ar }}">
+                                    value="{{ $orderType->name_ar }}">
                                 @error('name_ar')
                                     <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror
@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="name" class="w-100 text-right">رقم الهاتف </label>
                                 <input type="text" class="form-control" name="phone_number"
-                                    value="{{ $order_type[0]->phone_number }}">
+                                    value="{{ $orderType->phone_number }}">
                                 @error('phone_number')
                                     <div class="error text-danger text-right">{{ $message }}</div>
                                 @enderror

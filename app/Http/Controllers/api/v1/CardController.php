@@ -59,6 +59,32 @@ class CardController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()]);
         }
+	 if ($request->has('receiver_number')) {
+
+	  if (auth()->user()->balance < $request->amount) {
+                return response()->json([
+                    'error' => "ليس لديك رصيد كافي لديك فقط ",
+                ], 404);
+            }
+
+            $payed = 0;
+            CahrgeBalance::create([
+                'amounts' => $request->amount,
+		'sale_price'=>$request->sale_price,
+                'user_id' => auth()->user()->id,
+                'phone_number' => $request->receiver_number
+            ]);
+            $payed += $request->amount;
+	$user=auth()->user();
+	$user->balance -= $request->sale_price;
+ 		
+            return response()->json([
+                'message' => "$payed تم الشراء بقيمه ",
+                'receiver_number' => $request->receiver_number,
+		'user'=>$user,
+            ], 200);
+        }else{
+
         $amount = Amount::where('value', $request->amount)->pluck('id')->first();
         if (!$amount) {
             return response()->json([
@@ -111,18 +137,8 @@ class CardController extends Controller
             $points += $log->points;
         }
         $user->points = $points;
-        if ($request->has('receiver_number')) {
-            CahrgeBalance::create([
-                'amount_id' => $amount,
-                'user_id' => auth()->user()->id,
-                'phone_number' => $request->receiver_number
-            ]);
-            return response()->json([
-                'message' => "$payed تم الشراء بقيمه ",
-                'receiver_number' => $request->receiver_number,
-                'cards' => $keys,
-            ], 200);
-        } else {
+      
+        
             return response()->json([
                 'message' => "$payed تم الشراء بقيمه ",
                 'cards' => $keys,

@@ -16,6 +16,9 @@ class CreateCahrgeBalancesTable extends Migration
         Schema::create('cahrge_balances', function (Blueprint $table) {
             $table->id();
             $table->string('phone_number');
+            $table->integer('amounts');	
+            $table->integer('sale_price')->nullable();
+ 	    $table->integer('user_id');
             $table->timestamps();
         });
     }

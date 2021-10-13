@@ -143,4 +143,9 @@ class CompanyController extends Controller
         $company->save();
 
     }
+  public function delete($id)
+    {
+        Company::find($id)->delete();
+        return redirect()->back();
+    }
 }

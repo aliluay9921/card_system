@@ -48,6 +48,9 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
     Route::get('log/datatable', 'LogController@dataTable')->name('log.datatable');
     Route::get('datatable_cahrge_balance', 'LogController@dataTableChargeReport')->name('log.datatable_cahrge_balance');
 
+    Route::get('delete_company/{id}', 'CompanyController@delete')->name('company.delete');
+
+
     Route::resource('company', 'CompanyController');
     Route::resource('log', 'LogController');
     Route::resource('virtualBalance', 'VirtualBalanceController');

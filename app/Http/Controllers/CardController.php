@@ -34,9 +34,11 @@ class CardController extends Controller
             })->addColumn('profit', function ($row) {
                 return $row->sale_price - $row->puy_price;
             })->editColumn('created_at', function ($data) {
-                return $data->created_at->toDateTimeString();
+                return $data->created_at;
             })->editColumn('amount.value', function ($row) {
                 return number_format($row->amount->value);
+            })->editColumn('company.name', function ($row) {
+                return  empty($row->company->name) ? 'محذوفة' : $row->company->name;
             })
             ->editColumn('puy_price', function ($row) {
                 return number_format($row->puy_price);

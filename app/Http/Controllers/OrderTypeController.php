@@ -109,8 +109,8 @@ class OrderTypeController extends Controller
         // $ad_users = Ads_user::where('ads_id', $ad->id)->pluck('user_id')->toArray();
 
         // return view('cards.ads.edit', compact('ad', 'users', 'ad_users'));
-        $order_type = OrderType::find($orderType);
-        return view('cards.order.orderTypeEdit', compact('order_type'));
+       
+        return view('cards.order.orderTypeEdit', compact('orderType'));
     }
 
     /**
