@@ -119,13 +119,13 @@
                         searchable: true
                     },
                     {
-                        "data": "sale_card",
-                        "name": "sale_card",
+                        "data": "buy_card",
+                        "name": "buy_card",
                         orderable: true,
                         searchable: true
                     }, {
-                        "data": "buy_card",
-                        "name": "buy_card",
+                        "data": "sale_card",
+                        "name": "sale_card",
                         orderable: true,
                         searchable: true
                     },
