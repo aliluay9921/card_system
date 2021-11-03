@@ -14,7 +14,7 @@ class AddSalePriceToCahrgeBalancesTable extends Migration
     public function up()
     {
         Schema::table('cahrge_balances', function (Blueprint $table) {
-             $table->integer('sale_price')->nullable();
+            //  $table->integer('sale_price')->nullable();
         });
     }
 
@@ -26,8 +26,6 @@ class AddSalePriceToCahrgeBalancesTable extends Migration
     public function down()
     {
         Schema::table('cahrge_balances', function (Blueprint $table) {
-                        
-
         });
     }
 }

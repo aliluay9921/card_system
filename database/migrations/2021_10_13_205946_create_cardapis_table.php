@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCahrgeBalancesTable extends Migration
+class CreateCardapisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCahrgeBalancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cahrge_balances', function (Blueprint $table) {
+        Schema::create('cardapis', function (Blueprint $table) {
             $table->id();
-            $table->string('phone_number');
-            $table->integer('amounts');
-            $table->integer('sale_price')->nullable();
-            $table->integer('user_id');
+            $table->string('type_card')->nullable();
+            $table->string('buy_card')->default(0);
+            $table->string('sale_card')->default(0);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCahrgeBalancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cahrge_balances');
+        Schema::dropIfExists('cardapis');
     }
 }

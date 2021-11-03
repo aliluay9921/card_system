@@ -14,7 +14,6 @@ class AddUsersToCahrgeBalancesTable extends Migration
     public function up()
     {
         Schema::table('cahrge_balances', function (Blueprint $table) {
-            $table->integer('user_id');
             $table->integer('amount_id');
         });
     }

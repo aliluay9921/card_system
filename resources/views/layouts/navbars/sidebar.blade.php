@@ -74,60 +74,66 @@
 
 
                 @role('admin|super-admin')
-                <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('report')" href="{{ route('log.index') }}">
-                        <i class="ni ni-tv-2"></i>التقارير</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('report')" href="{{ route('charge_report') }}">
-                        <i class="fas fa-balance-scale"></i>تقارير التعبئة</a>
-                </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1  @yield('report')" href="{{ route('log.index') }}">
+                            <i class="ni ni-tv-2"></i>التقارير</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1  @yield('report')" href="{{ route('charge_report') }}">
+                            <i class="fas fa-balance-scale"></i>تقارير التعبئة</a>
+                    </li>
 
-                <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('amount')" href="{{ route('amount.index') }}">
-                        <i class="ni ni-money-coins"></i>الفئات</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('users')" href="{{ route('users.index') }}">
-                        <i class="fas fa-users"></i>المستخدمين
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1  @yield('card')" href="{{ route('card.index') }}">
-                        <i class="ni ni-credit-card"></i>
-                        البطاقات
-                    </a>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1  @yield('amount')" href="{{ route('amount.index') }}">
+                            <i class="ni ni-money-coins"></i>الفئات</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1  @yield('users')" href="{{ route('users.index') }}">
+                            <i class="fas fa-users"></i>المستخدمين
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1  @yield('card')" href="{{ route('card.index') }}">
+                            <i class="ni ni-credit-card"></i>
+                            البطاقات
+                        </a>
 
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('virtualBalance')" href="{{ route('virtualBalance.index') }}">
-                        <i class="fas fa-money-bill-wave"></i>
-                        الرصيد الافتراضي </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('ads')" href="{{ route('ads.index') }}">
-                        <i class="fas fa-tv"></i>
-                        الاعلانات
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('order')" href="{{ route('order.index') }}">
-                        <i class="ni ni-send"></i>
-                        الحوالات
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('company')" href="{{ route('company.index') }}">
-                        <i class="ni ni-building"></i>
-                        الشركات
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link my-1 @yield('order')" href="{{ route('order_type.index') }}">
-                        <i class="fas fa-text-height"></i>
-                        نوع الحوالات
-                    </a>
-                </li>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('virtualBalance')" href="{{ route('virtualBalance.index') }}">
+                            <i class="fas fa-money-bill-wave"></i>
+                            الرصيد الافتراضي </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('ads')" href="{{ route('ads.index') }}">
+                            <i class="fas fa-tv"></i>
+                            الاعلانات
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('order')" href="{{ route('order.index') }}">
+                            <i class="ni ni-send"></i>
+                            الحوالات
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('company')" href="{{ route('company.index') }}">
+                            <i class="ni ni-building"></i>
+                            الشركات
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('order')" href="{{ route('order_type.index') }}">
+                            <i class="fas fa-text-height"></i>
+                            نوع الحوالات
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link my-1 @yield('order')" href="{{ route('card_api.show') }}">
+                            <i class="fas fa-text-height"></i>
+                            بطاقات الكترونية
+                        </a>
+                    </li>
                 @endrole
 
             </ul>

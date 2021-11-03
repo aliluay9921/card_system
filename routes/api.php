@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\QicardController;
+use App\Http\Controllers\ApiCardController;
 use App\Mail\resetPasswordMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api\v1',], function () {
 
         route::post('recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'rechargeBalance']);
         route::post('addBills', [\App\Http\Controllers\api\v1\QicardController::class, 'addBill']);
+        route::get("get_cards", [ApiCardController::class, 'getCards']);
     });
     route::post('get_notification', [\App\Http\Controllers\api\v1\QicardController::class, 'getNotification']);
     route::get('get_recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'getrechargeBalance']);

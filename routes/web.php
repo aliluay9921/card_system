@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiCardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,12 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
 
     Route::get('users/{user?}', 'UserController@show')->name('users.show');
     Route::put('users/change/password/{user}', 'UserController@changePassword')->name('users.change.password');
+    route::get('add_card_api', [ApiCardController::class, 'addCardApi']); // add items from api cards to database
+    Route::get('get_cards', [ApiCardController::class, 'dataTable'])->name('card_api.datatable');
+    Route::get('show_cards', [ApiCardController::class, 'showCards'])->name('card_api.show');
+    Route::get('delete_cards/{id}', [ApiCardController::class, 'deleteCards']);
+    Route::get('edit_cards/{id}', [ApiCardController::class, 'editCards']);
+    Route::put('update_card', [ApiCardController::class, 'updateCard'])->name('card.update');
 });
 
 
