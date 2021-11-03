@@ -20,7 +20,7 @@ class LogController extends Controller
     }
     function dataTableChargeReport()
     {
-         $charge_balance = CahrgeBalance::with('user');
+        $charge_balance = CahrgeBalance::with('user');
         return Datatables::of($charge_balance)
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->toDateTimeString();
@@ -59,8 +59,12 @@ class LogController extends Controller
                     return $row->card->id;
                 }
             })->addColumn('company_name', function ($row) {
-                if ($row->transfer_type == "App\\Company") {
-                    return $row->transfer->name;
+                if (empty($row->transfer->name)) {
+                    return 'محذوفة';
+                } else {
+                    if ($row->transfer_type == "App\\Company") {
+                        return $row->transfer->name;
+                    }
                 }
                 if ($row->transfer_type == "App\\OrderType") {
                     return $row->transfer->name;
