@@ -16,9 +16,10 @@ class CreateCardapisTable extends Migration
         Schema::create('cardapis', function (Blueprint $table) {
             $table->id();
             $table->string('type_card')->nullable();
-            $table->string('buy_card')->default(0);
-            $table->string('sale_card')->default(0);
+            $table->double('buy_card')->nullable();
+            $table->double('sale_card')->nullable();
             $table->boolean('active')->default(true);
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }

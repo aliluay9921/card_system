@@ -31,47 +31,72 @@ class LogController extends Controller
     {
 
 
-        $cards = Log::with('user', 'transfer', 'card.amount');
+        $cards = Log::with('user', 'transfer', 'card.amount', "apiCard");
 
         return Datatables::of($cards)
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->toDateTimeString();
             })->editColumn('card.sale_price', function ($data) {
-                return $data->card ? number_format($data->card->sale_price) : $data->amount;
+                if ($data->apiCard) {
+                    return $data->amount;
+                } else {
+                    return $data->card ? number_format($data->card->sale_price) : $data->amount;
+                }
             })->addColumn('type', function ($row) {
-                if ($row->transfer_type == "App\\User") {
-                    return "تحويل رصيد";
-                } elseif ($row->transfer_type == "App\\OrderType") {
-                    return "حواله";
-                } elseif ($row->transfer_type == "App\\Company") {
-                    return "شراء كارتات";
+                if ($row->apiCard) {
+                    return "شراء من مصدر خارجي";
+                } else {
+                    if ($row->transfer_type == "App\\User") {
+                        return "تحويل رصيد";
+                    } elseif ($row->transfer_type == "App\\OrderType") {
+                        return "حواله";
+                    } elseif ($row->transfer_type == "App\\Company") {
+                        return "شراء كارتات";
+                    }
                 }
             })->addColumn('transfer_to', function ($row) {
-                if ($row->transfer_type == "App\\User") {
-                    return $row->user->name;
+                if ($row->apiCard) {
+                    return "لايوجد";
+                } else {
+                    if ($row->transfer_type == "App\\User") {
+                        return $row->user->name;
+                    }
                 }
             })->addColumn('card_amount', function ($row) {
-                if ($row->card) {
-                    return $row->card->amount->value;
+                if ($row->apiCard) {
+                    return $row->apiCard->type_card;
+                } else {
+                    if ($row->card) {
+                        return $row->card->amount->value;
+                    }
                 }
             })->addColumn('card_id', function ($row) {
-                if ($row->card) {
-                    return $row->card->id;
+                if ($row->apiCard) {
+                    return $row->apiCard->id;
+                } else {
+                    if ($row->card) {
+                        return $row->card->id;
+                    }
                 }
             })->addColumn('company_name', function ($row) {
-                if (empty($row->transfer->name)) {
-                    return 'محذوفة';
+                if ($row->apiCard) {
+                    return $row->apiCard->type_card;
                 } else {
-                    if ($row->transfer_type == "App\\Company") {
+                    if (empty($row->transfer->name)) {
+                        return 'محذوفة';
+                    } else if ($row->transfer_type == "App\\Company") {
+                        return $row->transfer->name;
+                    } else if ($row->transfer_type == "App\\OrderType") {
                         return $row->transfer->name;
                     }
                 }
-                if ($row->transfer_type == "App\\OrderType") {
-                    return $row->transfer->name;
-                }
             })->addColumn('transfer_to_phone', function ($row) {
-                if ($row->transfer_type == "App\\User") {
-                    return $row->user->phone;
+                if ($row->apiCard) {
+                    return "لايوجد";
+                } else {
+                    if ($row->transfer_type == "App\\User") {
+                        return $row->user->phone;
+                    }
                 }
             })->make(true);
     }

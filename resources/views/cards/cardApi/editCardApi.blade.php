@@ -23,7 +23,8 @@
                     </div>
                     <div class="card-body ">
 
-                        <form action="{{ route('card.update', ['id' => $card->id]) }}" method="post">
+                        <form action="{{ route('card.update', ['id' => $card->id]) }}" method="post"
+                            enctype="multipart/form-data">
                             @method('put')
 
                             @csrf
@@ -44,6 +45,14 @@
                                 </select>
                                 @error('active')
                                     <div class="error text-danger text-right">{{ $errors->first('active') }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="w-100 text-right">الصورة</label>
+                                <input type="file" class="form-control" name="image">
+
+                                @error('image')
+                                    <div class="error text-danger text-right">{{ $errors->first('image') }}</div>
                                 @enderror
                             </div>
                             <span class="w-100  d-flex mt-4">

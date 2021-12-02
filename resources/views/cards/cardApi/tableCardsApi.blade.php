@@ -24,6 +24,8 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive w-100">
+                            <a href="{{ route('refresh_api_card') }}"
+                                class="btn btn-primary text-white  float-right">اعادة تحميل البيانات </a>
                             <table id="cardTable" class="table table-bordered  table-hover">
                                 <thead class="bg-gradient-secondary text-darker">
                                     <tr>
@@ -32,6 +34,7 @@
                                         <th class="text-center ">سعر البيع</th>
                                         <th class="text-center ">تفعيل</th>
                                         <th class="text-center ">تاريخ الاصدار</th>
+                                        <th class="text-center ">الصور</th>
                                         <th class="text-center ">العمليات</th>
 
                                     </tr>
@@ -139,6 +142,12 @@
                     {
                         "data": "created_at",
                         "name": "created_at",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        "data": "image",
+                        "name": "image",
                         orderable: true,
                         searchable: true
                     },

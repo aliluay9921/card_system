@@ -31,13 +31,15 @@ class CompanyController extends Controller
     {
 
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'active' => 'required',
-            'avatar' => 'required |image',
-            'cover' => 'required |image',
-            'color' => 'required ',
-        ],
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'active' => 'required',
+                'avatar' => 'required |image',
+                'cover' => 'required |image',
+                'color' => 'required ',
+            ],
             [
                 'name.required' => 'يرجى ادخال اسم الشركة',
                 'active.required' => 'يرجى ادخال حاله الشركه',
@@ -74,7 +76,6 @@ class CompanyController extends Controller
         ]);
         $request->session()->flash('status', "تمت الاضافه بنجاح");
         return redirect()->back();
-
     }
 
 
@@ -92,12 +93,14 @@ class CompanyController extends Controller
 
     public function update(Request $request, Company $company)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'active' => 'required',
-            'avatar' => ' image',
-            'cover' => 'image',
-        ],
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'active' => 'required',
+                'avatar' => ' image',
+                'cover' => 'image',
+            ],
             [
                 'name.required' => 'يرجى ادخال اسم الشركة',
                 'active.required' => 'يرجى ادخال حاله الشركه',
@@ -116,7 +119,6 @@ class CompanyController extends Controller
             $avatarName = Str::random(25) . '.' . $image->getClientOriginalExtension();
             $request->file('avatar')->move($path, $avatarName);
             $company->avatar = $avatarName;
-
         }
 
         if ($request->hasFile('cover') && $request->file('cover') != null) {
@@ -125,7 +127,6 @@ class CompanyController extends Controller
             $coverName = Str::random(25) . '.' . $image->getClientOriginalExtension();
             $request->file('cover')->move($path, $coverName);
             $company->cover = $coverName;
-
         }
         $company->name = $request->name;
         $company->active = $request->active;
@@ -133,17 +134,14 @@ class CompanyController extends Controller
         $company->save();
         $request->session()->flash('status', "تمت التعديل بنجاح");
         return redirect()->back();
-
-
     }
 
     public function destroy(Company $company)
     {
         $company->active = 0;
         $company->save();
-
     }
-  public function delete($id)
+    public function delete($id)
     {
         Company::find($id)->delete();
         return redirect()->back();

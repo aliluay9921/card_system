@@ -79,7 +79,7 @@
                             <i class="ni ni-tv-2"></i>التقارير</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link my-1  @yield('report')" href="{{ route('charge_report') }}">
+                        <a class="nav-link my-1  @yield('charge_report')" href="{{ route('charge_report') }}">
                             <i class="fas fa-balance-scale"></i>تقارير التعبئة</a>
                     </li>
 
@@ -123,13 +123,13 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link my-1 @yield('order')" href="{{ route('order_type.index') }}">
+                        <a class="nav-link my-1 " href="{{ route('order_type.index') }}">
                             <i class="fas fa-text-height"></i>
                             نوع الحوالات
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link my-1 @yield('order')" href="{{ route('card_api.show') }}">
+                        <a class="nav-link my-1" href="{{ route('card_api.show') }}">
                             <i class="fas fa-text-height"></i>
                             بطاقات الكترونية
                         </a>

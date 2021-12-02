@@ -16,6 +16,12 @@ class Log extends Model
         return $this->belongsTo(Card::class, 'key', 'key');
     }
 
+
+    public function apiCard()
+    {
+        return $this->belongsTo(Cardapi::class, 'api_card_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

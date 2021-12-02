@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOwnerToCardsTable extends Migration
+class AddTypeActionToLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddOwnerToCardsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cards', function (Blueprint $table) {
-            $table->string('owner')->nullable();
+        Schema::table('logs', function (Blueprint $table) {
+            $table->integer("api_card_id")->nullable();
+            $table->integer("type_action")->default(0);
         });
     }
 
@@ -25,8 +26,9 @@ class AddOwnerToCardsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cards', function (Blueprint $table) {
-            $table->dropColumn('owner');
+        Schema::table('logs', function (Blueprint $table) {
+            $table->dropColumn('type_action');
+            $table->dropColumn('api_card_id');
         });
     }
 }

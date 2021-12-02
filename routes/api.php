@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'api\v1',], function () {
         route::post('recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'rechargeBalance']);
         route::post('addBills', [\App\Http\Controllers\api\v1\QicardController::class, 'addBill']);
         route::get("get_cards", [ApiCardController::class, 'getCards']);
+        route::post("buy_card", [ApiCardController::class, "buyCard"]);
     });
     route::post('get_notification', [\App\Http\Controllers\api\v1\QicardController::class, 'getNotification']);
     route::get('get_recharge_balance', [\App\Http\Controllers\api\v1\AuthController::class, 'getrechargeBalance']);

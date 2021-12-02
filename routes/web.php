@@ -72,6 +72,7 @@ Route::middleware(['auth', 'ActiveUser'])->group(function () {
     Route::get('delete_cards/{id}', [ApiCardController::class, 'deleteCards']);
     Route::get('edit_cards/{id}', [ApiCardController::class, 'editCards']);
     Route::put('update_card', [ApiCardController::class, 'updateCard'])->name('card.update');
+    route::get("refresh_api_card", [ApiCardController::class, 'refreshApiCard'])->name("refresh_api_card");
 });
 
 
