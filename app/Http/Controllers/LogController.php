@@ -11,7 +11,6 @@ class LogController extends Controller
 {
     public function index()
     {
-
         return view('cards.log.index');
     }
     public function getChargeReport()
@@ -26,13 +25,9 @@ class LogController extends Controller
                 return $data->created_at->toDateTimeString();
             })->make(true);
     }
-
     function dataTable()
     {
-
-
-        $cards = Log::with('user', 'transfer', 'card.amount', "apiCard");
-
+        $cards = Log::with('user', 'transfer', 'card.amount', "apiCard")->orderBy("created_at", "desc");
         return Datatables::of($cards)
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->toDateTimeString();
@@ -100,7 +95,6 @@ class LogController extends Controller
                 }
             })->make(true);
     }
-
     public function create()
     {
         //
